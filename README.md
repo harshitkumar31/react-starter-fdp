@@ -36,3 +36,7 @@ React.createElement('a', {href: 'mailto:xyz@example.com'}, 'xyz@example.com');
 ```
 
 Its better to use JSX syntax to keep the code clean and readable.
+
+
+Lifecycle Methods - https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
+
