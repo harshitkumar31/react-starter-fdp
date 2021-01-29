@@ -1,5 +1,7 @@
 # react-starter-fdp
 
+Uses https://github.com/krisnik/todo-app for Backend
+
 ## Understanding React Components
 
 ### What is a React Component?
