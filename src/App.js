@@ -2,27 +2,72 @@ import React, { Component } from 'react';
 import "./styles.css";
 
 import TodoList from './todoList';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Link,
+  Route
+} from 'react-router-dom';
+//https://reactrouter.com/web/example/url-params
 
-const list = [
-  {
-    name: "FDP",
-    status: false
-  },
-  {
-    name: "Training",
-    status: false
+
+export default class App extends React.Component {
+
+  constructor() {
+    super();
+    this.state = {
+      response: null
+    }
   }
-];
 
-export default function App() {
-  return (
-    <div className="App">
-      <h1>Todo app</h1>
-      <TodoList list={list} />
+  componentDidMount() {
+    fetch("http://localhost:3000/todo", {
+      headers: {
+        "Authorization": "Basic YWRtaW46YWRtaW4xMjM0"
+      }
+    })
+    .then(res => res.json())
+    .then(jsonResponse => {
+      console.log(jsonResponse);
 
-      <TodoList list={list} />
+      this.setState({
+        response: jsonResponse
+      });
+    });
+  }
 
-      <TodoList list={list} />
-    </div>
+  render() {
+
+    // const response = this.state.response;
+    const { response } = this.state; //  Object destructuring
+      
+      return (
+    <Router>
+        <div className="App">
+
+          <Link to="/" >Home</Link>
+          <br></br>
+          <Link to="/about" >About</Link>
+
+          <Switch>
+            <Route path="/" exact={true}>
+            <h1>Todo app</h1>
+            {
+              response && response.map(topic => {
+              return <TodoList tasks={topic.tasks} /> 
+              })
+            }
+              </Route>
+          
+          <Route path="/about">
+          <div>
+            About Us
+          </div>
+              </Route>
+          </Switch>
+        </div>
+      </Router>
   );
+  }
 }
+

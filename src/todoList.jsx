@@ -7,15 +7,15 @@ import './todolist.css';
  */
 const TodoList = (props) => {
 
-  const { list } = props;
+  const { tasks } = props;
   return (<div className="todolist">
     Todo List
     {
-      list.map((listItem) => (
+      tasks.list.map((listItem) => (
       <div>
-      <input type="checkbox" checked={listItem.status} ></input>
+      <input type="checkbox" ></input>
       <h3>
-        {listItem.name}
+        {listItem}
       </h3>
       </div>
       ) )
